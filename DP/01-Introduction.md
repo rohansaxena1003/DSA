@@ -11,3 +11,12 @@ Why and when does greedy algorithm fails ?
 What is DP ?
     So, DP problems have 2 properties: Optimal substructure 
     and Overlapping subproblems. 
+
+What is memoization ?
+    It is the process of storing repeated answers in dp array
+    while doing recursion. This greatly reduces stack calls
+    and improves time complexity.
+
+What is tabulation ?
+    It uses iterative calls to get dp array and this doesn't
+    use recursive it's more efficient than memoization.
