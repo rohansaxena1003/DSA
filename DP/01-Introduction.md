@@ -20,3 +20,55 @@ What is memoization ?
 What is tabulation ?
     It uses iterative calls to get dp array and this doesn't
     use recursive it's more efficient than memoization.
+
+Difference between memoization and tabulation.
+    ## Memoization vs Tabulation
+
+### Memoization (Top-Down)
+- Starts from the original problem and recursively breaks it into smaller subproblems.
+- Uses recursion.
+- Solves states only when they are needed (on demand).
+- Stores computed states to avoid recomputation.
+- Requires a recursion stack.
+- Easier to derive directly from the recurrence relation.
+- Can skip unreachable or unnecessary states.
+- Has recursion overhead, so it is usually slightly slower.
+- May cause StackOverflowError for very deep recursion.
+- Space Complexity: O(DP Array + Recursion Stack).
+
+### Tabulation (Bottom-Up)
+- Starts from the base cases and builds up to the final answer.
+- Uses iteration (loops).
+- Computes states in a predefined order.
+- Does not use recursion.
+- Does not require a recursion stack.
+- Requires identifying the correct order to fill the DP table.
+- Usually computes all states, even if some are unnecessary.
+- Faster in practice because there is no function call overhead.
+- No risk of stack overflow.
+- Space Complexity: O(DP Array) (can often be optimized further).
+
+---
+
+## Quick Comparison
+
+| Memoization | Tabulation |
+|-------------|------------|
+| Top-Down | Bottom-Up |
+| Uses Recursion | Uses Loops |
+| Solves states on demand | Solves states in a fixed order |
+| Uses Recursion Stack | No Recursion Stack |
+| Easier to derive | Requires fill-order analysis |
+| May skip unnecessary states | Usually computes all states |
+| Slightly slower (function call overhead) | Usually faster |
+| Risk of StackOverflowError | No StackOverflowError |
+
+---
+
+## Easy Way to Remember
+
+**Memoization asks:**
+> "What smaller problems do I need to solve to answer this question?"
+
+**Tabulation says:**
+> "I already know the answers to the smallest problems. Let me build the larger answers step by step."
