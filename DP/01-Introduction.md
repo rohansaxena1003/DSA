@@ -72,3 +72,11 @@ Difference between memoization and tabulation.
 
 **Tabulation says:**
 > "I already know the answers to the smallest problems. Let me build the larger answers step by step."
+
+Problem 1: Fibonacci Series
+    State: f(n) = n;
+        This means dp[0] = f(0), dp[1] = f(1), ...
+    Recurrence relation: f(i) = f(i-1) + f(i-2);
+    Memoization: Once you solve f(i), you store it in dp[i] and use it when f(i) is needed.
+    Tabulation: We keep dp[0] = 0 and dp[1] = 1 as base cases and move upward.
+    Space optimization: Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
