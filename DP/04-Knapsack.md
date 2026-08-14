@@ -69,5 +69,45 @@
   // we traverse columns from T to 0 because we need j-nums[i] for the previous row and traversing LR will override this data.
   TC: O(n.T), SC: O(n);
 
-
+### Target Sum
+  **State**
+  Let `i be current index` and 
+  `j be currentSum`, that is, `the accumulated signed sum for elements from 0 to i-1`;
+  > the state = f(i,j) tells the number of ways to assign signs to elements from i onwards such that the final accumulated sum becomes targetSum.
   
+  **Rec rel**
+  `plus = f(i+1, +nums[i] + j)`;
+  `minus = f(i+1, -nums[i] + j)`;
+  > So, `f(i, currentSum) = plus + minus`;
+  
+  **Base Case**
+  if (index == nums.length) {
+    return currentSum == target ? 1 : 0;
+  }
+  
+  **Recursion**
+  We use base case and the rec rel to write our recursive code.
+  TC: O(2^n); // each element creates 2 branches
+  SC: O(n); // we are only incrementing i ... n
+  
+  **Memoization**
+  Let S denote total positive sum of array elements. Since we can assign minus(-) sign to all the elements, therefore minimum sum possible becomes -S. So the range is -S to +S, that is 2S+1 possible currentSum.
+  Hence, we use dp array of size n by 2S+1 where n is array indexes from 0 to n-1.
+  We initialize the dp array elements by -1 to denote dp[i][j] hasn't been processed yet.
+  Now, to denote currentSum correctly in this array, we use an offset of +S with each currentSum.
+  > Let S = 5, so 2S+1= 11 is our total columns. If currentSum= -5, we use -5+S=0th column to denote it. If currentSum = -1, we use -1+S=4th column; if currentSum = 5, we use 10th column. 
+  The calls remain the same as recursive code. Only the dp access changes in this code.
+  TC: O(n.(2S+1)) = O(n.S);
+  SC: O(n) + O(n.(2S+1)) = O(n) + O(n.S) = O(n.(S+1)) = O(n.S);
+  
+  **Tabulation**
+  dp array will have n+1 rows from 0 to n and 2S+1 columns from 0 to 2S. 
+  dp[n][S + targetSum] = 1; // base case
+  Then we start from row n-1 and go till row 0. For each row, we travel columns from -S to +S or vice versa.For each cell , we `calculate plus and minus using plusCol, minusCol and calculate dp[i][j] where j is currentSum + S, and currentSum is the current column.`
+  TC: O(n.(2S+1)) = O(n.S);
+  SC: O(n.(2S+1)) = O(n.S);
+  
+  **Space Optimization**
+  Since we need data from only `next` row for the current row, we will use two 1D arrays for this purpose.
+  TC: O(n.(2S+1)) = O(n.S)
+  SC: O(2.n) = O(n);
