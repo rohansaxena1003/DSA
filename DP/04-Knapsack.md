@@ -34,6 +34,7 @@
   This way we will need only single array to obtain answer.
   TC: O(n.W), SC: O(1.W) = O(W); // single array used
 
+
 ### Partition Equal Subset Sum
   **State**
   Let i denote index and j denote remainingSum needed to reach target
@@ -68,6 +69,7 @@
   Both follow same pattern as 0/1 knapsack. 
   // we traverse columns from T to 0 because we need j-nums[i] for the previous row and traversing LR will override this data.
   TC: O(n.T), SC: O(n);
+
 
 ### Target Sum
   **State**
@@ -111,3 +113,62 @@
   Since we need data from only `next` row for the current row, we will use two 1D arrays for this purpose.
   TC: O(n.(2S+1)) = O(n.S)
   SC: O(2.n) = O(n);
+
+
+### Last Stone Weight-2
+  **State**
+  Let i represent the current index and j represent the absolute difference of 2 'groups' for the already processed stones. The groups represent the two sides of the eventual signed subtraction; they are not literal stones being combined.
+  `f(i,j) = The minimum possible stone weight after assigning stones from i to n-1 to either of the two conceptual groups, given that stones from 0 to i-1 have already been assigned and the current absolute difference between their group sums is j.`
+
+  **Rec rel**
+  We have two options, wither to assign stones[i] to the larger group or to the smaller group. The new difference that we get after assigning current stone to larger and smaller group is:
+  lGroupAssignDiff = j + stones[i]; // you can verify with example
+  sGroupAssignDiff = Math.abs(j - stones[i]);
+  So, the two function calls are:
+  > largerGroupChoice = f(i+1, j + stones[i]);
+  > smallerGroupChoice = f(i+1, Math.abs(j - stones[i]));
+  Finally, 
+  `f(i,j) = min( largerGroupChoice, smallerGroupChoice );`
+
+  **Base Case**
+  `f(n,j) = j;` // j represents the final absolute difference that we are gonna get after processing all the stones. Hence we will return j from the base case.
+
+  **Recursion**
+  We will use the base case and recurrence relation to write the code for it.
+  TC: O(2^n); // two calls inside every call
+  SC: O(n); // stack space
+
+  **Memoization**
+  We will make dp array of n by S+1 where S is the total sum of all stones. We need S because all stones can belong to one group. Eg. there is only one stone.
+  This dp array will greatly reduce the recurring call for same i,j.
+  TC: O(n*S);
+  SC: O(n*S) + O(n) = O(n*S); // O(n) is stack space
+
+  **Tabulation**
+  We need dp array of size n+1 by S+1.
+  We fill row n with j values, that is dp[n][j] = j; // base case
+  Since we need values from row i+1 for every row therefore we traverse from row n-1 towards row 0 and column traverse order doesn't matter.
+  Next, when we are at row i, we need to traverse columns from 0 to prefixSum because:
+  > The largest possible difference occurs when every processed stone is placed in the same group: jmax = prefixSum i.
+  > The smallest possible difference cannot be negative: jmin = 0
+  Therefore, `every reachable j must lie within: 0 ≤ j ≤ prefixSum i`
+
+  Let prefixSum = 0, suffixSum = 0;
+  suffixSum at n-1th row = stones[n-1], prefixSum = S - suffixSum;
+  Then at row n-2, suffixSum += stones[n-2], prefixSum = S - suffixSum;
+  .
+  .
+  .
+  At row i, suffixSum += stones[i], prefixSum = S - suffixSum
+  .
+  .
+  At row 0, suffixSum = S, prefixSum = 0;
+  TC: O(n.S);
+  SC: O(n.S);
+
+  **Space Optimization**
+  Since we need next and curr row at any time, we will use two 1D arrays of S+1 size.
+  TC: O(n.S)
+  SC: O(S);
+
+	​
