@@ -171,4 +171,65 @@
   TC: O(n.S)
   SC: O(S);
 
-	​
+
+# Day 4 — Knapsack and Subset DP Takeaways
+
+* Learned to recognize the common **take/skip pattern** across subset-based DP problems.
+
+* Understood that the second state variable can represent different things:
+
+  * Remaining capacity
+  * Remaining target
+  * Current accumulated sum
+  * Current signed sum
+  * Current absolute difference
+
+* Learned that the required result determines how choices are combined:
+
+  * Maximum value → `max`
+  * Minimum difference → `min`
+  * Possibility → OR
+  * Number of ways → addition
+
+* Practised the complete DP conversion:
+
+```text
+Recursion → Memoization → Tabulation → Space Optimization
+```
+
+* Learned to derive the tabulation base row directly from the recursive base case.
+
+* Understood one-array traversal direction:
+
+  * Lower-column dependency → right to left
+  * Higher-column dependency → left to right
+  * Dependencies on both sides → direct one-array updating is unsafe
+
+* **0/1 Knapsack:** Learned to maximize value under a capacity constraint and use backward traversal for one-array optimization.
+
+* **Partition Equal Subset Sum:** Learned to transform equal partitioning into checking whether a subset with sum `totalSum / 2` exists.
+
+* **Target Sum:** Learned to track negative and positive sums using offset normalization and reduce space to two arrays.
+
+* **Last Stone Weight II:** Learned to look beyond the physical simulation and represent repeated smashing as the absolute difference between two conceptual groups.
+
+* **Count Subsets:** Learned that counting requires adding take and skip results rather than using Boolean OR.
+
+* Understood why zeroes require special attention in counting problems: taking and skipping a zero are different choices even though the sum remains unchanged.
+
+* Learned the difference between:
+
+  * A range of possible DP columns
+  * The states that are genuinely reachable within that range
+
+* Understood that (O(nW)), (O(nK)), and (O(nS)) subset-DP solutions are pseudo-polynomial because they depend on numeric values.
+
+## Most Important Skill Developed
+
+> Identifying what information from previously processed elements must be carried forward, and then expressing that information as the second DP state variable.
+
+## Pending Revision After Day 7
+
+* Target Sum subset transformation and one-array optimization.
+* Last Stone Weight II standard minimum subset-difference one-array formulation.
+
