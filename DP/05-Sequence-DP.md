@@ -31,3 +31,9 @@
   We will use two 1D arrays since we need only curr and next row data.
   TC:O(n.m);
   SC: O(m);
+
+  **OneArrSpaceOpt**
+  > We need curr[j+1] and next[j+1] at the same time. Hence we will keep track of next[j+1] using a variable because it will be overwritten by curr[j+1]. 
+  > next[j] will be stored at the time we are at jth index before it's overwritten by takeBoth.
+  TC: O(n.m);
+  SC: O(m);
