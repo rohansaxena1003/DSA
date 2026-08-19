@@ -37,3 +37,32 @@
   > next[j] will be stored at the time we are at jth index before it's overwritten by takeBoth.
   TC: O(n.m);
   SC: O(m);
+
+
+### Edit Distance
+  **State:**
+  Let i be the current index of 1st string and j be the current index of the 2nd string.
+  So, f(i,j) = The min number of operations required to convert word1[i...n-1] to word2[j...m-1].
+
+  **Rec rel**
+  If word1[i] === word2[j] {
+    match = f(i+1,j+1) + 0; // +0 denotes no operation performed
+    `f(i,j) = match;`
+  } else {
+    insert = f(i,j+1) + 1; // j inserted symbolically, +1 denotes one operation performed
+    replace = f(i+1,j+1) + 1; // word2[j] replaces word1[i]; hence i+1,j+1; +1 for one operation performed
+    delete = f(i+1,j) + 1; // word1[i] deleted; +1 for one operation performed;  
+    `f(i,j) = min(insert,replace,delete);`
+  }
+
+  **Base case**
+  if(i==n) {
+    return m-j; // these m-j chars will be inserted to word1
+  }
+  if(j == m) {
+    return n-i; // n-i chars will be deleted from word1
+  }
+  **recursion**
+  We use rec rel and base case to write our code
+  TC: O(3^(n+m)); // 3 branches
+  SC: O(n+m); // stack space
