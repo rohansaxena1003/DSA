@@ -62,7 +62,29 @@
   if(j == m) {
     return n-i; // n-i chars will be deleted from word1
   }
+
   **recursion**
   We use rec rel and base case to write our code
   TC: O(3^(n+m)); // 3 branches
   SC: O(n+m); // stack space
+
+  **Memoization**
+  We will make dp array of n by m size and initialize it by -1. And store every i,j combo in dp array once calculated.
+  TC: O(n.m);
+  SC: O(n.m) + O(n+m) = O(n.m); // n+m is stack space
+
+  **Tabulation**
+  We will make dp array of n+1 by m+1 size. The nth row will initialize with m-j and mth column will initialize with n-i. Then we will traverse from n-1 row to 0th row and column traversal from m-1th row to 0th column.
+  Rest implementation remains same.
+  TC: O(n.m);
+  SC: O(n.m);
+
+  **Space Optimization**
+  Since we are depending on curr and next row data, therefore we will eliminate dp array and make two 1D arrays and reduce space complexity.
+  TC: O(n.m);
+  SC: O(2.m) = O(m);
+
+  **1D space optimization**
+  We will use only one array and store overriding cell values of nextJplus1 and nextJ in variables and use them in replace, delete and match cases.
+  TC: O(n.m);
+  SC: O(m);
