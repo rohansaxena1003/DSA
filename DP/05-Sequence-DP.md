@@ -1,3 +1,35 @@
+### LIS
+  **State**
+  Let i be the current index and j be the index of the previously selected element.
+  Hence, `f(i,j) represents the max additional length of an increasing subsequence that can be formed using elements from indices i to n-1, given the previously selected element is at index j`.
+
+  **Rec rel**
+  We have two choices at current index i, take it or skip it.
+  > We can take nums[i] if nums[i] > nums[j], 
+  hence `take = f(i+1,i) + 1;` // +1 for length increase; j becomes i because now last element becomes nums[i];
+  > `skip = f(i+1,j) +0;` // +0 since no increase in length
+
+   > `f(i,j) = max(take, skip)`;
+
+  **Base Case**
+  `if(i==n) { return 0;} // f(n,j) = 0;`
+
+  **Final answer**
+  f(0,-1);
+
+  **Recursion**
+  We will use rec rel and base case to write the code.
+  TC: O(2^n);
+  SC: O(n); // stack space
+
+  **Memoization**
+  We will make dp array of n by n+1 size. Rows/i from 0 to n-1 and columns/j from -1 to n-1.
+  This will reduce recurring calls for same i,j.
+  TC: O(n*n);
+  SC: O(n*n);
+  
+
+
 ### Longest common Subsequence
   **State**
   Let i and j be the current index of text1 and text2 respectively.
