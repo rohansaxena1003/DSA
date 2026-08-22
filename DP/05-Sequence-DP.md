@@ -27,6 +27,12 @@
   This will reduce recurring calls for same i,j.
   TC: O(n*n);
   SC: O(n*n);
+
+  **Tabulation**
+  We will make dp array of size n+1 by n+1. 
+  Last row(nth row) will be initialized by 0, that is base case dp[n][j] = 0. We will traverse from n-1th row to 0th row and get our dp array. Final answer will be dp[0][0] where 0th column represents j==-1.
+  TC: O(n.n);
+  SC: O(n.n);
   
 
 
