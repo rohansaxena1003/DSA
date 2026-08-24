@@ -35,6 +35,40 @@
   SC: O(n.n);
   
 
+### Number of LIS
+  **State**
+  Let i represent current index and j represent the index of the previous selected element.
+  So, `f(i,j) = (L,C)`;
+  > where L represents the max number of additional elements that can be selected from indices i to n-1, given that j is the previously selected element.
+  > and C represents the different number of ways we can obtain this max Length L from this state.
+
+  **Rec rel**
+  At current index i, we have two options: 
+  skip or take current element.
+  If we skip current element, then skip = f(i+1,j); // current index increases by 1 and j remains the same.
+  Next, we can take the current element if j>=0 and nums[i] > nums[i],
+  so take = f(i+1,i); // current index increases by 1 and i becomes the previous index.
+  Now, when we choose skip, we get two variables Ls, Cs in return representing Length if we skip and count if we skip. Similarly, we get Lt, Ct for take condition.
+  We will do Lt = Lt + 1 because we have selected current element and that increases the length Lt by 1, which needs to be reflected.
+  So,
+      `skip = (Ls, Cs)`
+      `take = (1 + Lt, Ct); if(j>=0 && nums[i] > nums[j])`
+  > We have 3 cases:
+    If (Lt > Ls) return (Lt, Ct);
+    If (Lt < Ls) return (Ls, Cs);
+    If (Lt = Ls) return (Lt, Ct + Cs);
+
+  **Base Case**
+  f(n,j) = (0,1); // we have traversed full array hence there is only 1 way to select zero elements and that is 1 way: to do nothing.
+
+  **Initial Call**
+  We will make f(0,-1) as the initial call because the current element is 0th index and previous index is -1, that is none of the element are evaluated yet and all elements are left to judge.
+
+  **Recursion**
+  We will use rec rel and base case to write the code.
+  TC: O(2^n); // because each recursive state can generate take and skip branches.
+  SC: O(n); // stack space
+
 
 ### Longest common Subsequence
   **State**
