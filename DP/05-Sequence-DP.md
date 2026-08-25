@@ -69,6 +69,16 @@
   TC: O(2^n); // because each recursive state can generate take and skip branches.
   SC: O(n); // stack space
 
+  **Memoization**
+  int[][][] dp = new int[n][n + 1][2];
+  with the mapping:
+  dp[i][j + 1][0] = maximum length for f(i, j)
+  dp[i][j + 1][1] = count of that maximum length
+  The shifted column again maps j = -1 to column 0.
+  Each length will be initialized by -1.
+  TC: O(n.n);
+  SC: O(n.n);
+
 
 ### Longest common Subsequence
   **State**
