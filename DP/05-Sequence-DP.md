@@ -45,9 +45,9 @@
   **Rec rel**
   At current index i, we have two options: 
   skip or take current element.
-  If we skip current element, then skip = f(i+1,j); // current index increases by 1 and j remains the same.
+  If we skip current element, then `skip = f(i+1,j);` // current index increases by 1 and j remains the same.
   Next, we can take the current element if j>=0 and nums[i] > nums[i],
-  so take = f(i+1,i); // current index increases by 1 and i becomes the previous index.
+  so `take = f(i+1,i);` // current index increases by 1 and i becomes the previous index.
   Now, when we choose skip, we get two variables Ls, Cs in return representing Length if we skip and count if we skip. Similarly, we get Lt, Ct for take condition.
   We will do Lt = Lt + 1 because we have selected current element and that increases the length Lt by 1, which needs to be reflected.
   So,
@@ -77,7 +77,22 @@
   The shifted column again maps j = -1 to column 0.
   Each length will be initialized by -1.
   TC: O(n.n);
+  SC: O(n.n); 
+
+  **Tabulation**
+  We need nth row to accmodate f(n,j) = 0,1 base case. Then, we traverse from row n-1 to row 0 and build up our array. Column traversal order doesn't nmatter. Just keep in mind that j < i for  column traversal.
+  TC: O(n.n);
   SC: O(n.n);
+
+  **SpaceOpt**
+  Since, we need next and curr row data at any time, hence we don't need 2D array.
+  TC: O(n.n);
+  SC: O(2.n) = O(n);
+
+  **One Array Space Opt**
+  Since we need only ith and jth column values of next row, we store arr[j] in skip array and copy its values to ls, cs before rewriting the cell. Similarly, we arr[i+1] on take array. Then we compute each cell one by one.
+  TC: O(n.n);
+  SC: O(n);
 
 
 ### Longest common Subsequence
