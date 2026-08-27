@@ -136,6 +136,10 @@
   SC: O(m);
 
 
+### Longest Palindromic Subsequence
+  We will take the string s and reverse of s and apply Longest common subsequence to get the answer. Rest implementation remains same.
+  
+
 ### Edit Distance
   **State:**
   Let i be the current index of 1st string and j be the current index of the 2nd string.
