@@ -1,4 +1,4 @@
-## Why and when does greedy algorithm fails ?
+### Why and when does greedy algorithm fails ?
     A greedy algorithm works when you choose the best option 
     at each step and this gives you the best final answer.
     When this fails, greedy algorithm fails. Eg. You have 3 
@@ -19,7 +19,7 @@ What is memoization ?
 
 What is tabulation ?
     It uses iterative calls to get dp array and this doesn't
-    use recursive it's more efficient than memoization.
+    use recursion and it's more efficient than memoization.
 
 Difference between memoization and tabulation.
     ## Memoization vs Tabulation
@@ -46,7 +46,7 @@ Difference between memoization and tabulation.
 - Usually computes all states, even if some are unnecessary.
 - Faster in practice because there is no function call overhead.
 - No risk of stack overflow.
-- Space Complexity: O(DP Array) (can often be optimized further).
+- Space Complexity: O(DP Array) (can often be optimized further depending on the dependencies for computing current dp state).
 
 ---
 
@@ -81,15 +81,27 @@ Difference between memoization and tabulation.
     Tabulation: We keep dp[0] = 0 and dp[1] = 1 as base cases and move upward.
     Space optimization: Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
 
-## Problem 2: Climbing Stairs
-    State: f(i) = No. of distinct ways to reach i from floor, where i is the current step.
-    Recurrence Relation: f(i) = f(i-1) + f(i-2);//We can jump from last or second last step to reach current step.
-    Base case: dp[0] = 1; // there is one way to reach floor and that is to nothing.Also, dp[-1] = 0; // there is no way to reach floor from -1.
-    Memoization: Once you solve f(i), you store it in dp[i] and use it when f(i) is needed.
-    Tabulation: We keep dp[0] = 1 and dp[-1] = 0 as base cases and move upward.
-    Space optimization: Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
-    TC: O(2^n), O(n), O(n) and O(n) for recursive, memoization, tabulation and space optimization.
-    SC: O(n) for recursive, memoization and tabulation. O(1) for space optimization.
+### Problem 2: Climbing Stairs
+**State** 
+    f(i) = No. of distinct ways to reach i from floor, where i is the current step.
+
+**Recurrence Relation:** 
+    f(i) = f(i-1) + f(i-2);//We can jump from last or second last step to reach current step.
+
+**Base case:** 
+    dp[0] = 1; // there is one way to reach floor and that is to nothing.Also, dp[-1] = 0; // there is no way to reach floor from -1 because we can only jump upwards.
+
+**Memoization:** 
+    Once you solve f(i), you store it in dp[i] and use it when f(i) is needed.
+
+**Tabulation:** 
+    We keep dp[0] = 1 and dp[-1] = 0 as base cases and move upward.
+
+**Space optimization:** 
+    Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
+
+TC: O(2^n), O(n), O(n) and O(n) for recursive, memoization, tabulation and space optimization.
+SC: O(n) for recursive, memoization and tabulation. O(1) for space optimization.
     
 ## Problem 3: Min Cost of Climbing Stairs
     State: f(i) = Min cost to reach stair i starting from the stair 0 or stair 1.
