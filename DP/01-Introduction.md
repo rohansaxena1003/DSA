@@ -102,12 +102,39 @@ Difference between memoization and tabulation.
 
 TC: O(2^n), O(n), O(n) and O(n) for recursive, memoization, tabulation and space optimization.
 SC: O(n) for recursive, memoization and tabulation. O(1) for space optimization.
-    
+
+
 ## Problem 3: Min Cost of Climbing Stairs
-    State: f(i) = Min cost to reach stair i starting from the stair 0 or stair 1.
-    Recurrence relation: At stair i, I have arrived from either stair i-1 or stair i-2. Also, I have to pay cost[i] at stair i in either case.
+**State:** 
+    f(i) = Min cost to reach stair i starting from the stair 0 or stair 1.
+    
+**Recurrence relation:** 
+    At stair i, I have arrived from either stair i-1 or stair i-2. Also, I have to pay cost[i] at stair i in either case.
     Therefore, f(i) = cost[i] + min(f(i-1), f(i-2));
-    Base case: f(0) = cost[0] and f(1) = cost[1]; //You can start from stair 0 or 1
+
+**Base case:** 
+    f(0) = cost[0] and f(1) = cost[1]; //You can start from stair 0 or 1
+
+**Recursion**
+    We will use base case and recurrence relation to write our code.
+    TC: O(2^n);
+    SC: O(n); // stack space
+
+**Memoization**
+    We will make dp array of size n. Now, we traverse from top and use recursion to get answer. This dp array will reduce recurring calls.
+    TC: O(n);
+    SC: O(n + n) = O(n);
+
+**Tabulation**
+    We will make dp array of size n and initialize dp[0]=cost[0], dp[1]=cost[1] and build our dp array from bottom to top to get our answer.
+    TC: O(n);
+    SC: O(n);
+
+**Space Opt**
+    Since we need only dp[i-1] and dp[i-2] at any time, thus we don't need any array. We can only need only two variables.
+    TC: O(n);
+    SC: O(1);
+
 
 ## Problem 4: House Robber
     State: f(i) = Max money that can be robbed starting from house i till the last house
