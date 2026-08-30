@@ -137,12 +137,21 @@ SC: O(n) for recursive, memoization and tabulation. O(1) for space optimization.
 
 
 ## Problem 4: House Robber
-    State: f(i) = Max money that can be robbed starting from house i till the last house
-            OR
-           f(i) = Max money robbed till house i from the start
-           Both approaches are correct and are used for memoization and tabulation respectively.
-    Recurrence relation: At house i, if I rob it I collect the money from this house and go to house i+2. If I skip it, I go to house i+1. Therefore, 
+**State:** 
+    f(i) = Max money that can be robbed starting from house i till the last house
+        OR
+    f(i) = Max money robbed till house i from the start
+    Both approaches are correct and are used for memoization and tabulation respectively.
+    
+**Recurrence relation:** 
+    At house i, if I rob it I collect the money from this house and go to house i+2. If I skip it, I go to house i+1. Therefore, 
     f(i) = Math.max(money[i]+f(i+2), f(i+1));
-    Memoization: We store f(i+1) and f(i+2) in dp array to reduce recursive calls.
-    Tabulation: We store f(i-1) and f(i-2) in dp array to build up the answer.
-    Space optimization: Since we only need only next 2/ previous 2 values, we can bypass dp array and save space.
+
+**Memoization:** 
+    We store f(i+1) and f(i+2) in dp array to reduce recursive calls.
+    
+**Tabulation:** 
+    We store f(i-1) and f(i-2) in dp array to build up the answer.
+    
+**Space optimization:** 
+    Since we only need only next 2/ previous 2 values, we can bypass dp array and save space.
