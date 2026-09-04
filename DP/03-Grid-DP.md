@@ -36,7 +36,7 @@ SC reduces to O(n).
 
 ### Unique Path 2
   The only extra constrain here is the obstacle cell.
-  If obstacleGrid[i][j] == 1 return 0;
+  `If obstacleGrid[i][j] == 1 return 0;`
   NOTE: One subtle thing to remember is that in tabulation, obstacle cells must explicitly become 0, because paths cannot flow through them. Other than that, the logic is the same.
 
 ### Minimum Path Sum
