@@ -1,4 +1,4 @@
-### Unique Path - 1
+# Unique Path - 1
 > **Problem statement** There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
 > Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
 
@@ -39,14 +39,54 @@ SC reduces to O(n).
   `If obstacleGrid[i][j] == 1 return 0;`
   NOTE: One subtle thing to remember is that in tabulation, obstacle cells must explicitly become 0, because paths cannot flow through them. Other than that, the logic is the same.
 
-### Minimum Path Sum
-  State: f(i,j) = Min path sum needed to reach cell i,j from start cell 0,0
-  Rec rel: f(i,j) = grid[i][j] + min(f(i-1,j), f(i,j-1));
-  Base cases: f(0,0) = grid[0][0]; // 1st base case
-  If(i<0 || j<0) return +Infinity; // because we need to ignore this in case of min Sum problem
-  Memoization, tabulation, space optimization and TC, SC will remain same as unique path 1 and 2. The only difference is that we need to take care of conditions according to this question.
+# Minimum Path Sum
+> ## **Problem statement** Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.
+> Note: You can only move either down or right at any point in time.
+Example 1:
+Input: grid = [[1,3,1],[1,5,1],[4,2,1]]
+Output: 7
+Explanation: Because the path 1 → 3 → 1 → 1 → 1 minimizes the sum.
 
-### Triangle
+Example 2:
+Input: grid = [[1,2,3],[4,5,6]]
+Output: 12
+ 
+Constraints:
+m == grid.length, n == grid[i].length, 1 <= m, n <= 200, 0 <= grid[i][j] <= 200
+
+### **State:** f(i,j) = Min path sum needed to reach cell i,j from start cell 0,0
+
+### **Rec rel:** 
+Let up = f(i-1, j); // cost to reach the cell above the current cell 
+Let left = f(i, j-1); // cost to reach the cell to the left of the current cell. 
+`f(i,j) = grid[i][j] + min(up, left);`
+  
+### **Base cases:** f(0,0) = grid[0][0]; // 1st base case
+  `If(i<0 || j<0) return +Infinity;` // because we need to ignore this in case of min Sum problem
+  
+### Recursion
+We will use base case and rec rel to implement our code.
+TC: O(2^(m+n));
+SC: O(m+n); // stack space
+
+### Memoization 
+We will make dp array of m by n size.
+We initialize the array cells by -1 to identify uncalculated f(i,j) cells. This dp array will store data for f(i,j) and will finish the need to calculate f(i,j) again and again. 
+TC: O(m.n); 
+SC: O(m.n + m+n) = O(m.n);
+
+### Tabulation
+We will make dp array of m by n size. dp[0][0] = grid[0][0]; // base case
+Then we will build our array and the answer will be `dp[m-1][n-1]`;
+TC: O(m.n); 
+SC: O(m.n);
+
+### Space optimization
+Since we need data of previous column of current row and previous of current column, we need info about only current row and previous row. So, we will two 1D arrays prev and curr and calculate dp[m-1][n-1] starting from dp[0][0].
+TC: O(m.n); // 2D traversal needed for each cell remains same
+SC:O(2.n) = O(n); // two rows of size n needed
+
+# Triangle
   State: f(i,j) = Min path sum needed to reach bottom row from current cell i,j
   Rec rel: f(i,j) = triangle[i][j] + min(f(i+1,j), f(i+1,j+1));
   Tabulation: This works best for this question. You will have bottom row as it is and move towards 1st row. So, dp[0][0] will be your answer.
@@ -54,7 +94,7 @@ SC reduces to O(n).
   NOTE: The main takeaway for Triangle is that unlike the earlier grid questions, bottom-up traversal is particularly natural because each cell depends on the two cells directly below it.
   Recursive, Memoization and Space Optimization done.
 
-### Dungeon Game
+# Dungeon Game
   **State:** 
   f(i,j) = Min health required when entering cell i,j to reach the princess kept in cell m-1,n-1 alive.
   Eg. If: f(i,j)=10, that means: The knight must have at least 10 health when entering (i,j) to guarantee that there is some valid route from (i,j) to the princess.
@@ -104,7 +144,7 @@ SC reduces to O(n).
     Time: O(m*n), Space: O(n)
 
 
-### Day 3 — Grid DP Takeaways
+# Day 3 — Grid DP Takeaways
 
 * **Grid DP state is usually 2D:** `dp[i][j]` represents the answer associated with cell `(i,j)`.
 
