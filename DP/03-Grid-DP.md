@@ -34,7 +34,7 @@ TC: O(m.n);
 SC reduces to O(n).
 
 
-### Unique Path 2
+# Unique Path 2
   The only extra constrain here is the obstacle cell.
   `If obstacleGrid[i][j] == 1 return 0;`
   NOTE: One subtle thing to remember is that in tabulation, obstacle cells must explicitly become 0, because paths cannot flow through them. Other than that, the logic is the same.
@@ -86,13 +86,44 @@ Since we need data of previous column of current row and previous of current col
 TC: O(m.n); // 2D traversal needed for each cell remains same
 SC:O(2.n) = O(n); // two rows of size n needed
 
+
+
 # Triangle
-  State: f(i,j) = Min path sum needed to reach bottom row from current cell i,j
-  Rec rel: f(i,j) = triangle[i][j] + min(f(i+1,j), f(i+1,j+1));
-  Tabulation: This works best for this question. You will have bottom row as it is and move towards 1st row. So, dp[0][0] will be your answer.
-  TC: O(n.n), SC: O(n.n)
-  NOTE: The main takeaway for Triangle is that unlike the earlier grid questions, bottom-up traversal is particularly natural because each cell depends on the two cells directly below it.
-  Recursive, Memoization and Space Optimization done.
+## **Problem Statement** Given a triangle array, return the minimum path sum from top to bottom.For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.
+
+
+> Example 1:
+Input: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+Output: 11
+Explanation: The triangle looks like:
+2
+3 4
+6 5 7
+4 1 8 3
+The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above).
+
+> Example 2:
+Input: triangle = [[-10]]
+Output: -10
+ 
+> Constraints:
+  1 <= triangle.length <= 200, triangle[0].length == 1, 
+  triangle[i].length == triangle[i - 1].length + 1
+  -104 <= triangle[i][j] <= 104
+ 
+> Follow up: Could you do this using only O(n) extra space, where n is the total number of rows in the triangle?
+
+### **State** f(i,j) = Min path sum needed to reach bottom row from current cell i,j
+
+### **Rec rel** f(i,j) = triangle[i][j] + min(f(i+1,j), f(i+1,j+1));
+  
+### **Tabulation** This works best for this question. You will have bottom row as it is and move towards 1st row. So, dp[0][0] will be your answer.
+TC: O(n.n), SC: O(n.n)
+  
+### NOTE: The main takeaway for Triangle is that unlike the earlier grid questions, bottom-up traversal is particularly natural because each cell depends on the two cells directly below it.
+  
+> `Recursive, Memoization and Space Optimization done.`
+
 
 # Dungeon Game
   **State:** 
