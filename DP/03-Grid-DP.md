@@ -126,35 +126,71 @@ TC: O(n.n), SC: O(n.n)
 
 
 # Dungeon Game
-  **State:** 
-  f(i,j) = Min health required when entering cell i,j to reach the princess kept in cell m-1,n-1 alive.
+## **Problem Statement** 
+The demons had captured the princess and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of m x n rooms laid out in a 2D grid. Our valiant knight was initially positioned in the top-left room and must fight his way through dungeon to rescue the princess.
+
+The knight has an initial health point represented by a positive integer. If at any point his health point drops to 0 or below, he dies immediately.
+
+Some of the rooms are guarded by demons (represented by negative integers), so the knight loses health upon entering these rooms; other rooms are either empty (represented as 0) or contain magic orbs that increase the knight's health (represented by positive integers).
+
+To reach the princess as quickly as possible, the knight decides to move only rightward or downward in each step.
+
+Return the knight's minimum initial health so that he can rescue the princess.
+
+Note that any room can contain threats or power-ups, even the first room the knight enters and the bottom-right room where the princess is imprisoned.
+
+ 
+
+Example 1:
+Input: dungeon = [[-2,-3,3],[-5,-10,1],[10,30,-5]]
+Output: 7
+Explanation: The initial health of the knight must be at least 7 if he follows the optimal path: RIGHT-> RIGHT -> DOWN -> DOWN.
+
+Example 2:
+Input: dungeon = [[0]]
+Output: 1
+
+Constraints:
+m == dungeon.length
+n == dungeon[i].length
+1 <= m, n <= 200
+-1000 <= dungeon[i][j] <= 1000
+
+### **State:** f(i,j) = Min health required when entering cell i,j to reach the princess kept in cell m-1,n-1 alive.
   Eg. If: f(i,j)=10, that means: The knight must have at least 10 health when entering (i,j) to guarantee that there is some valid route from (i,j) to the princess.
     So: 9 health  → not enough
     10 health → enough
     11 health → also enough
     20 health → also enough
-  **Rec rel:** 
+  
+### **Rec rel:** 
   We need to define multiple factors to get the rec rel.
-    1. min(f(i+1,j), f(i,j+1)) // This helps us select the path that is better for the knight.
-    2. Now, we will subtract dungeon[i][j] from eq 1 because we need the min health required for the knight at i,j cell.
+  1. eq1 = min(f(i+1,j), f(i,j+1)) // This helps us select the path that is better for the knight.
+  
+  2. Now, we will subtract dungeon[i][j] from eq 1 because we need the min health required for the knight at i,j cell.
       So, eq2 is: eq1 - dungeon[i][j];
-    3. The knight's health at any cell can't be less than 1, therefore
+    
+  3. The knight's health at any cell can't be less than 1, therefore
     `f(i,j)` = `max( 1, eq2 )` = max(  1,  min(f(i+1,j),f(i,j+1)) - dungeon[i][j]   )
     Note: Use the following 3 examples to validate
       -> next required = 6, dungeon[i][j] = -3;
       -> next required = 6, dungeon[i][j] = +4;
       -> next required = 6, dungeon[i][j] = +10;
-    **Base Cases:**
-    1. If f(m-1,n-1) = max( 1, 1-dungeon[m-1][n-1]);
+    
+### **Base Cases:**
+  1. If f(m-1,n-1) = max( 1, 1-dungeon[m-1][n-1]);
     Use these examples to validate this
     -> dungeon[m-1][n-1] = +5;
     -> dungeon[m-1][n-1] = 0;
     -> dungeon[m-1][n-1] = -8;
-    2. If(i>=m || j>=n) return +INF; // We need min in eq1 therefore invalid paths should never be selected. 
-    **Recursion**
+    
+  2. If(i>=m || j>=n) return +INF; // We need min in eq1 therefore invalid paths should never be selected. 
+  
+### **Recursion**
     We will use the rec rel and base cases to write our code
     TC: O(2^(m+n)), SC: O(m+n); // space is due to recursion stack
-    **Memoization**
+   
+  **Memoization**
     We can see that we are giving function call to the same cell multiple times.So we will use dp array to reduce these repeating calls.
     TC: O(m.n), SC: O(m+n) + O(m.n);
     **Tabulation**
