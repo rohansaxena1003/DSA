@@ -163,8 +163,7 @@ n == dungeon[i].length
     11 health → also enough
     20 health → also enough
   
-### **Rec rel:** 
-  We need to define multiple factors to get the rec rel.
+### **Rec rel:** We need to define multiple factors to get the rec rel.
   1. eq1 = min(f(i+1,j), f(i,j+1)) // This helps us select the path that is better for the knight.
   
   2. Now, we will subtract dungeon[i][j] from eq 1 because we need the min health required for the knight at i,j cell.
@@ -186,21 +185,19 @@ n == dungeon[i].length
     
   2. If(i>=m || j>=n) return +INF; // We need min in eq1 therefore invalid paths should never be selected. 
   
-### **Recursion**
-    We will use the rec rel and base cases to write our code
+### **Recursion** We will use the rec rel and base cases to write our code
     TC: O(2^(m+n)), SC: O(m+n); // space is due to recursion stack
    
-  **Memoization**
-    We can see that we are giving function call to the same cell multiple times.So we will use dp array to reduce these repeating calls.
-    TC: O(m.n), SC: O(m+n) + O(m.n);
-    **Tabulation**
-    We fill the array from bottom right to top left.
-    TC: O(m.n), SC: O(m.n); // stack space saved 
-    **Space Optimization**
-    dp[i][j] depends only on:
-      down  = next[j]
-      right = curr[j+1]
+### **Memoization** We can see that we are giving function call to the same cell multiple times.So we will use dp array to reduce these repeating calls.
+    TC: O(m.n)
+    SC: O(m+n) + O(m.n) = O(m.n);
+    
+### **Tabulation** We fill the array from bottom right to top left.
 
+    TC: O(m.n)
+    SC: O(m.n); // stack space saved 
+    
+### **Space Optimization** dp[i][j] depends only on: down  = next[j], right = curr[j+1]
     So, use two 1D arrays:
       next[] → next row
       curr[] → current row
@@ -209,6 +206,7 @@ n == dungeon[i].length
       next = curr
 
     Time: O(m*n), Space: O(n)
+
 
 
 # Day 3 — Grid DP Takeaways
