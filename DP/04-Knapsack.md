@@ -1,22 +1,57 @@
-### 0/1 KnapSack
-  **State:**
-  f(index, remainingWeight) means the maximum value that can be attained using items from index onwards, when the knapsack has *remainingWeight capacity* left.
+# 0/1 KnapSack
+## **Problem statement** Given two arrays, val[] and wt[], where each element represents the value and weight of an item respectively, and an integer W representing the maximum capacity of the knapsack (the total weight it can hold).
+
+Put the items into the knapsack such that the total value obtained is maximum without exceeding the capacity W.
+
+> Note: You can either include an item completely or exclude it entirely — fractional selection of items is not allowed. Each item is available only once.
+
+Example 1:
+Input: W = 4, val[] = [1, 2, 3], wt[] = [4, 5, 1]
+Output: 3
+Explanation: Choose the last item, which weighs 1 unit and has a value of 3.
+
+Example 2:
+Input: W = 3, val[] = [1, 2, 3], wt[] = [4, 5, 6] 
+Output: 0
+Explanation: Every item has a weight exceeding the knapsack's capacity (3).
+
+Example 3:
+Input: W = 5, val[] = [10, 40, 30, 50], wt[] = [5, 4, 2, 3] 
+Output: 80
+Explanation: Choose the third item (value 30, weight 2) and the last item (value 50, weight 3) for a total value of 80.
+
+Constraints:
+1 ≤ W, val.size(), val[i], wt.size(), wt[i] ≤ 103
+wt.size() = val.size()
+
+
+### **State:** f(index, remainingWeight) means the maximum value that can be attained using items from index onwards, when the knapsack has *remainingWeight capacity* left.
   Eg, if index = 2 then items at index 0 and 1 have been considered, while 2 is yet to be decided.
-  **Rec rel:**
+  
+
+### **Rec rel:**
   Let i represent index and j represent weight.
   `skip = f(i+1,j);` 
   `take = value[i] + f(i+1,j-weight[i]);` // if j-weight[i] >= 0;
+  
   So, 
   `f(i,j) = max(take, skip) if j-weight[i] >= 0`
-  `OR`
+  OR
   `f(i,j) = skip`;
-  **Base Case:**
+
+
+### **Base Case:**
   if(i==n) return 0; // we have reached the last index and that every item has been considered.
   if(j==0) return 0; // no positive weight can be selected, so no extra value can be gained.
-  **Recursion**
+  
+  
+### **Recursion**
   We will use the rec rel and base cases to write our code.
-  TC: O(2^n), SC: O(n); // stack space
-  **Memoization**
+  TC: O(2^n)
+  SC: O(n); // stack space
+  
+  
+### **Memoization**
   We can see we will reach f(i,j) multiple times.
   We will use dp array of size n by (W+1) and optimize time complexity.
   TC: O(n.W), SC(n.W);
