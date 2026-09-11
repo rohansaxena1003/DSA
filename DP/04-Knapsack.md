@@ -75,42 +75,68 @@ wt.size() = val.size()
 
 
 # Partition Equal Subset Sum
-  **State**
-  Let i denote index and j denote remainingSum needed to reach target
+## **Problem statement** Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.
+
+Example 1:
+Input: nums = [1,5,11,5]
+Output: true
+Explanation: The array can be partitioned as [1, 5, 5] and [11].
+
+Example 2:
+Input: nums = [1,2,3,5]
+Output: false
+Explanation: The array cannot be partitioned into equal sum subsets.
+ 
+Constraints:
+1 <= nums.length <= 200
+1 <= nums[i] <= 100
+  
+  
+### **State** Let i denote index and j denote remainingSum needed to reach target
   f(i,j) represents weather we can form remainingSum j using some elements from index onwards.
-  **Rec rel**
+  
+### **Rec rel**
   If we skip element at i then, `skip = f(i+1,j);`
   If we take it, then `take = f(i+1, j-element[i]); // j-element[i] >= 0`
   So, 
   `f(i,j) = take || skip; if j-element[i] >= 0`
   `OR`
   `f(i,j) = skip;`
-  **Base Case**
+
+### **Base Case**
   `if(j==0) return true;` // valid subset found
   `if(i==n) return false;` // we have reached end of array but haven't found a valid subset.
   // check j==0 condition first to avoid f(n,0) error
-  **Recursion**
-  We will use the rec rel and base cases to write our code.
-  TC: O(2^n), SC: O(n); // stack space
-  **Memoization**
+  
+### **Recursion** We will use the rec rel and base cases to write our code.
+  TC: O(2^n);
+  SC: O(n); // stack space
+  
+### **Memoization**
   We will make a dp array of n.(T+1) size. Initialize it with -1, use 0 for false and 1 for true. We don't use boolean array because if can't determine if dp[i][j] is already determined.
-  TC: O(n.T), SC: O(n) + O(n.(T+1)) = O(n.T); // O(n) is stack space
-  **Tabulation**
+  TC: O(n.T);
+  SC: O(n) + O(n.(T+1)) = O(n.T); // O(n) is stack space
+  
+### **Tabulation**
   We will make a DP array of size (n+1).(T+1)
-  The first column will be initialized by 1; //base case
-  Last column will be initialized by 0; // 2nd base case
+  The first column will be initialized by 1; //base case // true condition
+  Last column will be initialized by 0; // 2nd base case // false condition
   Now, we work from row n-1 to row 0 and calculate each cell.
   Our final answer will be dp[0][T]; // this means T can be formed by using elements from index 0 onwards. 
   Although the answer can also be dp[i][T] == 1, we will use dp[0][T] for clariy.
-  TC: O(n.T), SC: O(n.T);
+  TC: O(n.T);
+  SC: O(n.T);
   `We can also use boolean dp array for tabulation`
-  **Space Optimization & Single Array space optimization**
+  
+### **Space Optimization & Single Array space optimization**
   Both follow same pattern as 0/1 knapsack. 
   // we traverse columns from T to 0 because we need j-nums[i] for the previous row and traversing LR will override this data.
-  TC: O(n.T), SC: O(n);
+  TC: O(n.T);
+  SC: O(n);
 
 
-### Target Sum
+
+# Target Sum
   **State**
   Let `i be current index` and 
   `j be currentSum`, that is, `the accumulated signed sum for elements from 0 to i-1`;
