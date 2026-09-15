@@ -247,7 +247,7 @@ Constraints:
   Let i represent the current index and j represent the absolute difference of 2 'groups' for the already processed stones. The groups represent the two sides of the eventual signed subtraction; they are not literal stones being combined.
   `f(i,j) = The minimum possible stone weight after assigning stones from i to n-1 to either of the two conceptual groups, given that stones from 0 to i-1 have already been assigned and the current absolute difference between their group sums is j.`
 
-  **Rec rel**
+## **Rec rel**
   We have two options, whether to assign stones[i] to the larger group or to the smaller group. The new difference that we get after assigning current stone to larger and smaller group is:
   lGroupAssignDiff = j + stones[i]; // you can verify with example
   sGroupAssignDiff = Math.abs(j - stones[i]);
@@ -257,22 +257,21 @@ Constraints:
   Finally, 
   `f(i,j) = min( largerGroupChoice, smallerGroupChoice );`
 
-  **Base Case**
-  `f(n,j) = j;` // j represents the final absolute difference that we are gonna get after processing all the stones. Hence we will return j from the base case.
 
-  **Recursion**
-  We will use the base case and recurrence relation to write the code for it.
+## **Base Case** `f(n,j) = j;` // j represents the final absolute difference that we are gonna get after processing all the stones. Hence we will return j from the base case.
+
+
+## **Recursion** We will use the base case and recurrence relation to write the code for it.
   TC: O(2^n); // two calls inside every call
   SC: O(n); // stack space
 
-  **Memoization**
-  We will make dp array of n by S+1 where S is the total sum of all stones. We need S because all stones can belong to one group. Eg. there is only one stone.
+
+## **Memoization** We will make dp array of n by S+1 where S is the total sum of all stones. We need S because all stones can belong to one group. Eg. there is only one stone.
   This dp array will greatly reduce the recurring call for same i,j.
   TC: O(n*S);
   SC: O(n*S) + O(n) = O(n*S); // O(n) is stack space
 
-  **Tabulation**
-  We need dp array of size n+1 by S+1.
+## **Tabulation** We need dp array of size n+1 by S+1.
   We fill row n with j values, that is dp[n][j] = j; // base case
   Since we need values from row i+1 for every row therefore we traverse from row n-1 towards row 0 and column traverse order doesn't matter.
   Next, when we are at row i, we need to traverse columns from 0 to prefixSum because:
