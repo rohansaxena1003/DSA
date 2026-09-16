@@ -292,8 +292,7 @@ Constraints:
   TC: O(n.S);
   SC: O(n.S);
 
-  **Space Optimization**
-  Since we need next and curr row at any time, we will use two 1D arrays of S+1 size.
+### **Space Optimization** Since we need next and curr row at any time, we will use two 1D arrays of S+1 size.
   TC: O(n.S)
   SC: O(S);
 
