@@ -1,10 +1,29 @@
-### LIS
-  **State**
-  Let i be the current index and j be the index of the previously selected element.
+# LIS
+## **Problem statement** Given an integer array nums, return the length of the longest strictly increasing subsequence.
+ 
+Example 1:
+Input: nums = [10,9,2,5,3,7,101,18]
+Output: 4
+Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+
+Example 2:
+Input: nums = [0,1,0,3,2,3]
+Output: 4
+
+Example 3:
+Input: nums = [7,7,7,7,7,7,7]
+Output: 1
+ 
+Constraints:
+1 <= nums.length <= 2500
+-104 <= nums[i] <= 104
+ 
+Follow up: Can you come up with an algorithm that runs in O(n log(n)) time complexity?
+  
+## **State** Let i be the current index and j be the index of the previously selected element.
   Hence, `f(i,j) represents the max additional length of an increasing subsequence that can be formed using elements from indices i to n-1, given the previously selected element is at index j`.
 
-  **Rec rel**
-  We have two choices at current index i, take it or skip it.
+## **Rec rel** We have two choices at current index i, take it or skip it.
   > We can take nums[i] if nums[i] > nums[j], 
   hence `take = f(i+1,i) + 1;` // +1 for length increase; j becomes i because now last element becomes nums[i];
   > `skip = f(i+1,j) +0;` // +0 since no increase in length
