@@ -30,18 +30,18 @@ Follow up: Can you come up with an algorithm that runs in O(n log(n)) time compl
 
    > `f(i,j) = max(take, skip)`;
 
-  **Base Case**
+## **Base Case**
   `if(i==n) { return 0;} // f(n,j) = 0;`
 
-  **Final answer**
+## **Final answer**
   f(0,-1);
 
-  **Recursion**
+## **Recursion**
   We will use rec rel and base case to write the code.
   TC: O(2^n);
   SC: O(n); // stack space
 
-  **Memoization**
+## **Memoization**
   We will make dp array of n by n+1 size. Rows/i from 0 to n-1 and columns/j from -1 to n-1.
   This will reduce recurring calls for same i,j.
   TC: O(n*n);
