@@ -74,7 +74,7 @@ Constraints:
 -106 <= nums[i] <= 106
 The answer is guaranteed to fit inside a 32-bit integer.
 
-  **State**
+## **State**
   Let i represent current index and j represent the index of the previous selected element.
   So, `f(i,j) = (L,C)`;
   > where L represents the max number of additional elements that can be selected from indices i to n-1, given that j is the previously selected element.
