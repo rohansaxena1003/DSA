@@ -73,7 +73,15 @@ Difference between memoization and tabulation.
 **Tabulation says:**
 > "I already know the answers to the smallest problems. Let me build the larger answers step by step."
 
-## Problem 1: Fibonacci Series
+# Problem 1: Fibonacci Series
+## **Problem Statement** : Given an integer `n`, calculate the `n-th` Fibonacci number.
+
+The Fibonacci sequence is defined as:
+- F(0) = 0
+- F(1) = 1
+- F(n) = F(n-1) + F(n-2), for n >= 2.
+
+Return the `n-th` Fibonacci number.
     State: f(n) = n;
         This means dp[0] = f(0), dp[1] = f(1), ...
     Recurrence relation: f(i) = f(i-1) + f(i-2);
@@ -81,62 +89,77 @@ Difference between memoization and tabulation.
     Tabulation: We keep dp[0] = 0 and dp[1] = 1 as base cases and move upward.
     Space optimization: Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
 
-### Problem 2: Climbing Stairs
-**State** 
-    f(i) = No. of distinct ways to reach i from floor, where i is the current step.
+# Problem 2: Climbing Stairs
+## **Problem Statement** : You are climbing a staircase. It takes n steps to reach the top.
+Each time, you can either:
+- Climb 1 step, or
+- Climb 2 steps.
+Your task is to find:
+In how many distinct ways can you reach the top?
 
-**Recurrence Relation:** 
-    f(i) = f(i-1) + f(i-2);//We can jump from last or second last step to reach current step.
+## **State** f(i) = No. of distinct ways to reach i from floor, where i is the current step.
 
-**Base case:** 
-    dp[0] = 1; // there is one way to reach floor and that is to nothing.Also, dp[-1] = 0; // there is no way to reach floor from -1 because we can only jump upwards.
+## **Recurrence Relation:** f(i) = f(i-1) + f(i-2);//We can jump from last or second last step to reach current step.
 
-**Memoization:** 
-    Once you solve f(i), you store it in dp[i] and use it when f(i) is needed.
+## **Base case:** dp[0] = 1; // there is one way to reach floor and that is to nothing.Also, dp[-1] = 0; // there is no way to reach floor from -1 because we can only jump upwards.
 
-**Tabulation:** 
-    We keep dp[0] = 1 and dp[-1] = 0 as base cases and move upward.
+## **Memoization:** Once you solve f(i), you store it in dp[i] and use it when f(i) is needed.
 
-**Space optimization:** 
-    Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
+## **Tabulation:** We keep dp[0] = 1 and dp[-1] = 0 as base cases and move upward.
 
+## **Space optimization:** Since you need dp[i-1] and dp[i-2] only, you can avoid dp array and use 2 variables only.
 TC: O(2^n), O(n), O(n) and O(n) for recursive, memoization, tabulation and space optimization.
 SC: O(n) for recursive, memoization and tabulation. O(1) for space optimization.
 
 
-## Problem 3: Min Cost of Climbing Stairs
-**State:** 
+# Problem 3: Min Cost of Climbing Stairs
+## **Problem Statement** You are given an integer array `cost`, where `cost[i]` represents the cost of stepping on the `i-th` stair.
+
+Once you pay the cost, you can either climb 1 step or 2 steps.
+You can start from either step 0 or step 1.
+Your task is to find the minimum total cost required to reach the top of the floor.
+
+Note: The top of the floor is one step beyond the last index of the array. You do not have to pay any cost to reach the top.
+
+## **State:** 
     f(i) = Min cost to reach stair i starting from the stair 0 or stair 1.
     
-**Recurrence relation:** 
+## **Recurrence relation:** 
     At stair i, I have arrived from either stair i-1 or stair i-2. Also, I have to pay cost[i] at stair i in either case.
     Therefore, f(i) = cost[i] + min(f(i-1), f(i-2));
 
-**Base case:** 
+## **Base case:** 
     f(0) = cost[0] and f(1) = cost[1]; //You can start from stair 0 or 1
 
-**Recursion**
+## **Recursion**
     We will use base case and recurrence relation to write our code.
     TC: O(2^n);
     SC: O(n); // stack space
 
-**Memoization**
+## **Memoization**
     We will make dp array of size n. Now, we traverse from top and use recursion to get answer. This dp array will reduce recurring calls.
     TC: O(n);
     SC: O(n + n) = O(n);
 
-**Tabulation**
+## **Tabulation**
     We will make dp array of size n and initialize dp[0]=cost[0], dp[1]=cost[1] and build our dp array from bottom to top to get our answer.
     TC: O(n);
     SC: O(n);
 
-**Space Opt**
+## **Space Opt**
     Since we need only dp[i-1] and dp[i-2] at any time, thus we don't need any array. We can only need only two variables.
     TC: O(n);
     SC: O(1);
 
 
-## Problem 4: House Robber
+# Problem 4: House Robber
+## **Problem Statement** : You are a professional robber planning to rob houses along a street.
+
+Each house has a certain amount of money stored in it, represented by an integer array `nums`, where `nums[i]` represents the money in the `i-th` house.
+
+The only restriction is that you cannot rob two adjacent houses because the security system will be triggered.
+
+Your task is to determine the maximum amount of money you can rob without robbing two adjacent houses.
 **State:** 
     f(i) = Max money that can be robbed starting from house i till the last house
         OR
