@@ -1,34 +1,34 @@
 # Unique Path - 1
-> **Problem statement** There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
-> Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+## **Problem statement** There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+- Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
 
 The test cases are generated so that the answer will be less than or equal to 2 * 10^9.
 
-**State:** 
+### **State:** 
 `f(i,j) = Total number of ways to reach (i,j) cell from (0,0) cell.`
 
-**Rec rel:** 
+### **Rec rel:** 
 `f(i,j) = No. of ways to reach the above cell + no. of ways to reach left cell`
   > So, f(i,j) = f(i-1,j) + f(i,j-1);
 
-**Base case:** 
+### **Base case:** 
 `f(0,0) = 1;` // because there is only way to reach start and that is to do nothing.
   Also, if recursion reaches case where one of coordinate is negative like f(-1,0) or f(0,-1), we will ignore these cases.
   So, `f(i,j) = 0 if i<0 or j<0`
 
-**Memoization:** 
+### **Memoization:** 
 We will use a dp array of size m.n to store f(i,j). dp arrays value can be initialized by zero.
 TC: O(m.n);
 SC: O(m.n) + O(m+n);
 
-**Tabulation:** 
+### **Tabulation:** 
 Put dp[0][0] = 1; and build up the array.
 TC: For recursive code, it is O(2^(m+n)). Memoization and tabulation its O(m.n)
 SC: For recursive code, its O(m+n); // stack space
     For memoization, its O(m+n) + O(m.n); // stack space+dp array
     For tabulation, its O(m.n); //dp array
   
-**Space Optimization:** 
+### **Space Optimization:** 
 We will store prev and current row data since we need the prev element of the current row and same column element of the previous row. The previous row will be initialized by 1 since it's the only possible answer. Also, the first element of each current row will be 1. 
 TC: O(m.n);
 SC reduces to O(n).
@@ -38,6 +38,7 @@ SC reduces to O(n).
   The only extra constrain here is the obstacle cell.
   `If obstacleGrid[i][j] == 1 return 0;`
   NOTE: One subtle thing to remember is that in tabulation, obstacle cells must explicitly become 0, because paths cannot flow through them. Other than that, the logic is the same.
+
 
 # Minimum Path Sum
 > ## **Problem statement** Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.
@@ -82,14 +83,14 @@ TC: O(m.n);
 SC: O(m.n);
 
 ### Space optimization
-Since we need data of previous column of current row and previous of current column, we need info about only current row and previous row. So, we will two 1D arrays prev and curr and calculate dp[m-1][n-1] starting from dp[0][0].
+Since we need data of previous column of current row and previous row of current column, we need info about only current row and previous row. So, we will make two 1D arrays prev and curr and calculate dp[m-1][n-1] starting from dp[0][0].
 TC: O(m.n); // 2D traversal needed for each cell remains same
 SC:O(2.n) = O(n); // two rows of size n needed
 
 
 
 # Triangle
-## **Problem Statement** Given a triangle array, return the minimum path sum from top to bottom.For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.
+> ## **Problem Statement** Given a triangle array, return the minimum path sum from top to bottom.For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.
 
 
 > Example 1:
@@ -141,12 +142,14 @@ Note that any room can contain threats or power-ups, even the first room the kni
 
  
 
-Example 1:
-Input: dungeon = [[-2,-3,3],[-5,-10,1],[10,30,-5]]
+> Example 1:
+Input: dungeon = [[-2,-3,3],
+                  [-5,-10,1],
+                  [10,30,-5]]
 Output: 7
 Explanation: The initial health of the knight must be at least 7 if he follows the optimal path: RIGHT-> RIGHT -> DOWN -> DOWN.
 
-Example 2:
+> Example 2:
 Input: dungeon = [[0]]
 Output: 1
 
