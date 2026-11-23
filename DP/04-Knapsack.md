@@ -54,9 +54,9 @@ wt.size() = val.size()
   We can see we will reach f(i,j) multiple times.
   We will use dp array of size n by (W+1) and optimize time complexity.
   TC: O(n.W)
-  SC(n.W);
+  SC: (n.W);
 
-### **Tabulation** : We will have dp array of size n+1 rows and W+1 columns because weights can be    from 0 to W and nth index row is needed to cater to base case.
+### **Tabulation** : We will have dp array of size n+1 rows and W+1 columns because weights can be from 0 to W and nth index row is needed to cater to base case.
   Now, so we can fill the first column with zero, because if the remaining weight is zero, then we cannot add any value.
   Next, we will traverse from n-1th row because to calculate skip or take, we need data from i+1th row. This also means that we can do column traversal LR or RL because it's independent of current column and only needs j-weight[i] column in i+1th row which is already calculated.
   return dp[0][W] as final answer.
@@ -68,7 +68,7 @@ wt.size() = val.size()
   SC: O(2.W) = O(W); // linear space used
 
 ### **Single Array space Optimization**
-  Look at the conditions to calculate skip, take. We need j-weight[i] column data and since j-weight[i] != j because weight[i] > 0, therefore we will traverse column from W to 0, that is RL. For row, we only need data from i+1th row at any time so we will store it at the same index. 
+  Look at the conditions to calculate skip, take. We need j-weight[i] column data and since j-weight[i] < j because weight[i] > 0, therefore we will traverse column from W to 0, that is RL. For row, we only need data from i+1th row at any time so we will store it at the same index. 
   This way we will need only single array to obtain answer.
   TC: O(n.W)
   SC: O(1.W) = O(W); // single array used
@@ -93,7 +93,7 @@ Constraints:
   
   
 ### **State** Let i denote index and j denote remainingSum needed to reach target
-  f(i,j) represents weather we can form remainingSum j using some elements from index onwards.
+  * f(i,j) represents weather we can form remainingSum j using some elements from index onwards.
   
 ### **Rec rel**
   If we skip element at i then, `skip = f(i+1,j);`
