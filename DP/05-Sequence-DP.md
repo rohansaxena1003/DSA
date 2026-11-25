@@ -28,7 +28,7 @@ Follow up: Can you come up with an algorithm that runs in O(n log(n)) time compl
   hence `take = f(i+1,i) + 1;` // +1 for length increase; j becomes i because now last element becomes nums[i];
   > `skip = f(i+1,j) +0;` // +0 since no increase in length
 
-   > `f(i,j) = max(take, skip)`;
+   > `f(i,j) = max(take, skip)`; // We need maximum length
 
 ## **Base Case**
   `if(i==n) { return 0;} // f(n,j) = 0;`
